@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
+/* El modulo Http o HttpClient varia de version de angular */
+import { HttpClientModule } from '@angular/common/http';
+
 /* Rutas */
 import { appRouting } from './app.routes';
 
@@ -16,6 +19,7 @@ import { TableListComponent } from './components/table-list/table-list.component
 import { MatTableModule } from '@angular/material/table';
 import { NewSalaComponent } from './components/new-sala/new-sala.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InformesComponent } from './components/informes/informes.component';
 
 @NgModule({
   declarations: [
@@ -23,10 +27,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavBarComponent,
     DashboardComponent,
     TableListComponent,
-    NewSalaComponent
+    NewSalaComponent,
+    InformesComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     appRouting,
     BrowserAnimationsModule,
     MatTableModule,

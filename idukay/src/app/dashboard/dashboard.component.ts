@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { SalasService } from 'src/app/services/salas.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,5 +24,9 @@ export class DashboardComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, public salasService: SalasService) {
+    salasService.getSalas().subscribe( (data: any) => {
+      console.log(data);
+    });
+  }
 }

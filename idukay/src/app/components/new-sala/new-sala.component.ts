@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { SalasService } from 'src/app/services/salas.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-sala',
@@ -13,13 +15,32 @@ export class NewSalaComponent {
 
   });
 
+  public sala;
 
-  constructor(private fb: FormBuilder) {}
+
+  constructor(private fb: FormBuilder, public salasService: SalasService, private router: Router, private activatedRoute: ActivatedRoute) {
+
+  }
 
   onSubmit() {
     console.log(this.formulario);
+
     if (this.formulario.valid) {
-      console.log('Registrando');
+      this.sala = {
+        titulo: this.formulario.controls.nombreSala.value,
+        descripcion: this.formulario.controls.descripcion.value,
+      };
+      this.createSala(this.sala);
     }
+  }
+
+  createSala(nuevaSala) {
+    this.salasService.nuevaSala(nuevaSala)
+    .subscribe(data => {
+      console.log(data);
+      // this.router.navigate(['/dashboard']);
+    }, error => {
+      console.log(error);
+    });
   }
 }
